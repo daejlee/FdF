@@ -28,10 +28,6 @@ int	terminate(fdf_t_info *p)
 			free (p->map_color[i++]);
 		free (p->map_color);
 	}
-	if (p->mp)
-		free (p->mp);
-	if (p->wp1)
-		free (p->wp1);
 	return (0);
 }
 
@@ -82,6 +78,7 @@ int	main(int argc, char **argv)
 		mlx_pixel_put(p.mp, p.wp1, i++, 450, 16777215);
 	mlx_string_put(p.mp, p.wp1, 620, 470, 16777215, "is this on air?\n");
 	//sleep(10);
+	mlx_destroy_window(p.mp, p.wp1);
 	terminate(&p);
 	return (0);
 }
