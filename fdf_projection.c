@@ -12,13 +12,11 @@ void	*free_tri_arr(fdf_t_info *p)
 	i = 0;
 	while (i < p->x)
 	{
-		i++;
+		k = 0;
 		while (k < p->y)
-		{
-			k = 0;
 			free (p->map_proj[i][k++]);
-		}
 		free (p->map_proj[i]);
+		i++;
 	}
 	free (p->map_proj);
 	return (0);
