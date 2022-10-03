@@ -12,15 +12,15 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!parse_arg(&p, argv))
 		return (err());
-	print_int_arr(p);
 	p.mp = mlx_init();
 	if (!p.mp)
 		return (err());
-	p.wp1 = mlx_new_window(p.mp, 1200, 900, "test");
+	p.wp1 = mlx_new_window(p.mp, 1600, 900, "test");
 	if (!p.wp1)
 		return (err());
 	if (!get_projection(&p))
 		return (terminate(&p));
+	print_int_arr(p);
 	//sleep(10);
 	mlx_destroy_window(p.mp, p.wp1);
 	terminate(&p);

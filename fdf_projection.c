@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define PI 3.1415926;
-
 void	*free_tri_arr(fdf_t_info *p, int ***arr)
 {
 	unsigned int	i;
@@ -60,17 +58,19 @@ void	shoot_proj(fdf_t_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
+	unsigned int	scale;
 	int				z;
 
 	i = 0;
+	scale = 900 / p->map_size;
 	while (i < p->x)
 	{
 		k = 0;
 		while (k < p->y)
 		{
 			z = p->map_cord[i][k];
-			p->map_proj[i][k][0] = (sqrt(2) * (i * 10) - sqrt(2) * (z * 10)) / 2;
-			p->map_proj[i][k][1] = (sqrt(6) * (i * 10) + 2 * sqrt(6) * (k * 10) + sqrt(6) * (z * 10)) / 6;
+			p->map_proj[i][k][0] = (sqrt(2) * (i * scale) - sqrt(2) * (z * scale)) / 2;
+			p->map_proj[i][k][1] = (sqrt(6) * (i * scale) + 2 * sqrt(6) * (k * scale) + sqrt(6) * (z * scale)) / 6;
 			k++;
 		}
 		i++;

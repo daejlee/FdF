@@ -10,6 +10,7 @@ typedef struct s_fdf_info
 	int				**map_cord;
 	int				**map_color;
 	int				***map_proj;
+	unsigned int	map_size;
 }	fdf_t_info;
 
 int			parse_arg(fdf_t_info *p, char **argv);

@@ -118,6 +118,10 @@ int	get_map(fdf_t_info *p, char *filename, int fd)
 		i++;
 		free_arr(temp);
 	}
+	if (p->x < p-> y)
+		p->map_size = p->y;
+	else
+		p->map_size = p->x;
 	return (1);
 }
 

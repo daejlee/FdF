@@ -55,6 +55,19 @@ void	print_int_arr(fdf_t_info p)
 		i++;
 	}
 	ft_printf("---------------------------------------------------------------\n");
+	i = 0;
+	while (i < p.y)
+	{
+		k = 0;
+		while (k < p.x)
+		{
+			ft_printf("%i,", p.map_proj[k][i][0]);
+			ft_printf("%i ", p.map_proj[k++][i][1]);
+		}
+		ft_printf("\n");
+		i++;
+	}
+	ft_printf("---------------------------------------------------------------\n");
 }
 
 int	free_arr(char **arr)
