@@ -27,6 +27,8 @@ int	terminate(fdf_t_info *p)
 			free (p->map_color[i++]);
 		free (p->map_color);
 	}
+	if (p->map_proj)
+		free_tri_arr(p);
 	return (0);
 }
 

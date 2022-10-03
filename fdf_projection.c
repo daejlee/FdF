@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void	*free_tri_arr(fdf_t_info *p, int ***arr)
+void	*free_tri_arr(fdf_t_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -16,11 +16,11 @@ void	*free_tri_arr(fdf_t_info *p, int ***arr)
 		while (k < p->y)
 		{
 			k = 0;
-			free (arr[i][k++]);
+			free (p->map_proj[i][k++]);
 		}
-		free (arr[i]);
+		free (p->map_proj[i]);
 	}
-	free (arr);
+	free (p->map_proj);
 	return (0);
 }
 
@@ -47,7 +47,7 @@ int	***get_proj_slots(fdf_t_info *p)
 		{
 			ret[i][k] = (int *)malloc(sizeof (int) * 2);
 			if (!ret[i][k++])
-				return (free_tri_arr(p, ret));
+				return (free_tri_arr(p));
 		}
 		i++;
 	}
