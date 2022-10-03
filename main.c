@@ -4,59 +4,6 @@
 #include "./libft_garage/libft/libft.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
 
-int	err(void)
-{
-	perror("fdf error :");
-	return (1);
-}
-
-int	terminate(fdf_t_info *p)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (p->map_cord)
-	{
-		while (p->map_cord[i])
-			free (p->map_cord[i++]);
-		free (p->map_cord);
-	}
-	i = 0;
-	if (p->map_color)
-	{
-		while (p->map_color[i])
-			free (p->map_color[i++]);
-		free (p->map_color);
-	}
-	return (0);
-}
-
-void	print_int_arr(fdf_t_info p)
-{
-	unsigned int	i;
-	unsigned int	k;
-
-	i = 0;
-	while (i < p.col)
-	{
-		k = 0;
-		while (k < p.row)
-			ft_printf("%i ", p.map_cord[i][k++]);
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("---------------------------------------------------------------\n");
-	i = 0;
-	while (i < p.col)
-	{
-		k = 0;
-		while (k < p.row)
-			ft_printf("%i ", p.map_color[i][k++]);
-		ft_printf("\n");
-		i++;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	unsigned int	i;
