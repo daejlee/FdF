@@ -6,5 +6,6 @@
 		"mlx_int.h": "c",
 		"fdf.h": "c",
 		"stdlib.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

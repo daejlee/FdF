@@ -6,7 +6,6 @@
 
 int	main(int argc, char **argv)
 {
-	unsigned int	i;
 	fdf_t_info	p;
 
 	if (argc == 1)
@@ -20,10 +19,8 @@ int	main(int argc, char **argv)
 	p.wp1 = mlx_new_window(p.mp, 1200, 900, "test");
 	if (!p.wp1)
 		return (err());
-	i = 600;
-	while (i < 800)
-		mlx_pixel_put(p.mp, p.wp1, i++, 450, 16777215);
-	mlx_string_put(p.mp, p.wp1, 620, 470, 16777215, "is this on air?\n");
+	if (!get_projection(&p))
+		return (terminate(&p));
 	//sleep(10);
 	mlx_destroy_window(p.mp, p.wp1);
 	terminate(&p);
