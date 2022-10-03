@@ -11,22 +11,10 @@ int	err(void)
 
 int	terminate(fdf_t_info *p)
 {
-	unsigned int	i;
-
-	i = 0;
 	if (p->map_cord)
-	{
-		while (i < p->x)
-			free (p->map_cord[i++]);
-		free (p->map_cord);
-	}
-	i = 0;
+		free_arr((char **)p->map_cord);
 	if (p->map_color)
-	{
-		while (i < p->x)
-			free (p->map_color[i++]);
-		free (p->map_color);
-	}
+		free_arr((char **)p->map_color);
 	if (p->map_proj)
 		free_tri_arr(p);
 	return (0);
