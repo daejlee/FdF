@@ -70,14 +70,11 @@ void	shoot_proj(fdf_t_info *p)
 		{
 			z = p->map_cord[i][k];
 			p->map_proj[i][k][0] = (cos(b) * i - sin(b) * k) * scale;
-			//(cos(b) * i - sin(b) * z) * scale;
 			if (p->map_proj[i][k][0] > p->x_max)
 				p->x_max = p->map_proj[i][k][0];
 			if (p->map_proj[i][k][0] < p->x_min)
 				p->x_min = p->map_proj[i][k][0];
 			p->map_proj[i][k][1] = scale * (k * cos(a + b) + k * cos(a - b) - 2 * z * sin(a) + i * sin(a + b) - i * sin(a - b)) / 2;
-			//scale * ((2 * k * cos(a)) - (i * cos(a + b))
-			//		+ i * cos(a - b) + z * sin(a + b) + z * sin(a - b)) / 2;
 			if (p->map_proj[i][k][1] > p->y_max)
 				p->y_max = p->map_proj[i][k][1];
 			if (p->map_proj[i][k][1] < p->y_min)
@@ -100,9 +97,15 @@ void	move_proj(fdf_t_info *p)
 		while (k < p->y)
 		{
 			if (p->x_min < 0)
+			{
 				p->map_proj[i][k][0] -= p->x_min;
+				p->x_max -= p->x_min;
+			}
 			if (p->y_min < 0)
+			{
 				p->map_proj[i][k][1] -= p->y_min;
+				p->y_max -= p->y_min;
+			}
 			k++;
 		}
 		i++;
@@ -123,6 +126,7 @@ void	print_proj(fdf_t_info *p)
 		while (k < p->y)
 		{
 			mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
+			con_dots(p, i, k);
 			k++;
 		}
 		i++;

@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 		return (err());
 	if (!proj(&p))
 		return (terminate(&p));
-	print_int_arr(p);
+	//print_int_arr(p);
 	sleep(15);
 	mlx_destroy_window(p.mp, p.wp1);
 	terminate(&p);
