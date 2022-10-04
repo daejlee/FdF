@@ -4,24 +4,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-void	*free_tri_arr(fdf_t_info *p)
-{
-	unsigned int	i;
-	unsigned int	k;
-
-	i = 0;
-	while (i < p->x)
-	{
-		k = 0;
-		while (k < p->y)
-			free (p->map_proj[i][k++]);
-		free (p->map_proj[i]);
-		i++;
-	}
-	free (p->map_proj);
-	return (0);
-}
-
 int	***get_proj_slots(fdf_t_info *p)
 {
 	int				***ret;
@@ -68,7 +50,56 @@ void	shoot_proj(fdf_t_info *p)
 		{
 			z = p->map_cord[i][k];
 			p->map_proj[i][k][0] = (sqrt(2) * (i * scale) - sqrt(2) * (z * scale)) / 2;
+			if (p->map_proj[i][k][0] > p->x_max)
+				p->x_max = p->map_proj[i][k][0];
+			if (p->map_proj[i][k][0] < p->x_min)
+				p->x_min = p->map_proj[i][k][0];
 			p->map_proj[i][k][1] = (sqrt(6) * (i * scale) + 2 * sqrt(6) * (k * scale) + sqrt(6) * (z * scale)) / 6;
+			if (p->map_proj[i][k][1] > p->y_max)
+				p->y_max = p->map_proj[i][k][1];
+			if (p->map_proj[i][k][1] < p->y_min)
+				p->y_min = p->map_proj[i][k][1];
+			k++;
+		}
+		i++;
+	}
+}
+
+void	move_proj(fdf_t_info *p)
+{
+	unsigned int	i;
+	unsigned int	k;
+
+	i = 0;
+	while (i < p->x)
+	{
+		k = 0;
+		while (k < p->y)
+		{
+			if (p->x_min < 0)
+				p->map_proj[i][k][0] -= p->x_min;
+			if (p->y_min < 0)
+				p->map_proj[i][k][1] -= p->y_min;
+			k++;
+		}
+		i++;
+	}
+}
+
+void	print_proj(fdf_t_info *p)
+{
+	unsigned int	i;
+	unsigned int	k;
+
+	if (p->x_min < 0 || p->y_min < 0)
+		move_proj(p);
+	i = 0;
+	while (i < p->x)
+	{
+		k = 0;
+		while (k < p->y)
+		{
+			mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
 			k++;
 		}
 		i++;
@@ -81,6 +112,6 @@ int	get_projection(fdf_t_info *p)
 	if (!p->map_proj)
 		return (0);
 	shoot_proj(p);
-	//print_proj(p);
+	print_proj(p);
 	return (1);
 }

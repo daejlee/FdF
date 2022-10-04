@@ -111,7 +111,7 @@ int	get_map(fdf_t_info *p, char *filename, int fd)
 				*ft_strchr(temp[k], ',') = '\0';
 			}
 			else
-				p->map_color[k][i] = 0;
+				p->map_color[k][i] = 16777215;
 			p->map_cord[k][i] = ft_atoi(temp[k]);
 			k++;
 		}

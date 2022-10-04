@@ -82,3 +82,21 @@ int	free_arr(char **arr)
 	free (arr);
 	return (0);
 }
+
+void	*free_tri_arr(fdf_t_info *p)
+{
+	unsigned int	i;
+	unsigned int	k;
+
+	i = 0;
+	while (i < p->x)
+	{
+		k = 0;
+		while (k < p->y)
+			free (p->map_proj[i][k++]);
+		free (p->map_proj[i]);
+		i++;
+	}
+	free (p->map_proj);
+	return (0);
+}
