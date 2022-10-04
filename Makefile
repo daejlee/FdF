@@ -13,7 +13,7 @@
 NAME = fdf
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
-SRC = main.c fdf_parse.c fdf_util_1.c fdf_projection.c
+SRC = main.c fdf_parse.c fdf_util_1.c fdf_proj.c
 OBJ = $(SRC:.c=.o)
 LIBFT = ./libft_garage/libft.a
 LIBFT_DIR = ./libft_garage

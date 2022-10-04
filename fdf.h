@@ -22,7 +22,7 @@ int			free_arr(char **arr);
 int			err(void);
 int			terminate(fdf_t_info *p);
 void		print_int_arr(fdf_t_info p);
-int			get_projection(fdf_t_info *p);
+int			proj(fdf_t_info *p);
 void		*free_tri_arr(fdf_t_info *p);
 
 # endif

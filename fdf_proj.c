@@ -106,7 +106,7 @@ void	print_proj(fdf_t_info *p)
 	}
 }
 
-int	get_projection(fdf_t_info *p)
+int	proj(fdf_t_info *p)
 {
 	p->map_proj =  get_proj_slots(p);
 	if (!p->map_proj)

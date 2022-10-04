@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 	p.wp1 = mlx_new_window(p.mp, 1600, 900, "test");
 	if (!p.wp1)
 		return (err());
-	if (!get_projection(&p))
+	if (!proj(&p))
 		return (terminate(&p));
 	print_int_arr(p);
 	sleep(30);
