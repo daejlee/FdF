@@ -4,6 +4,22 @@
 #include <stdlib.h>
 #include <math.h>
 
+/*
+z ---------------------------------------------------------> x
+| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+| 0  0 10 10  0  0 10 10  0  0  0 10 10 10 10 10  0  0  0
+| 0  0 10 10  0  0 10 10  0  0  0  0  0  0  0 10 10  0  0
+| 0  0 10 10  0  0 10 10  0  0  0  0  0  0  0 10 10  0  0
+| 0  0 10 10 10 10 10 10  0  0  0  0 10 10 10 10  0  0  0
+| 0  0  0 10 10 10 10 10  0  0  0 10 10  0  0  0  0  0  0
+| 0  0  0  0  0  0 10 10  0  0  0 10 10  0  0  0  0  0  0
+| 0  0  0  0  0  0 10 10  0  0  0 10 10 10 10 10 10  0  0
+| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+| 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+y
+*/
+
 int	***get_proj_slots(fdf_t_info *p)
 {
 	int				***ret;
@@ -40,21 +56,26 @@ void	shoot_proj(fdf_t_info *p)
 	unsigned int	k;
 	unsigned int	scale;
 	int				z;
+	double			a;
+	double			b;
 
 	i = 0;
 	scale = 900 / p->map_size;
+	a = 0.615472907;
+	b = 0.785398;
 	while (i < p->x)
 	{
 		k = 0;
 		while (k < p->y)
 		{
 			z = p->map_cord[i][k];
-			p->map_proj[i][k][0] = (sqrt(2) * (i * scale) - sqrt(2) * (z * scale)) / 2;
+			p->map_proj[i][k][0] = cos(b) * (i * scale) - sin(b) * (z * scale);
 			if (p->map_proj[i][k][0] > p->x_max)
 				p->x_max = p->map_proj[i][k][0];
 			if (p->map_proj[i][k][0] < p->x_min)
 				p->x_min = p->map_proj[i][k][0];
-			p->map_proj[i][k][1] = (sqrt(6) * (i * scale) + 2 * sqrt(6) * (k * scale) + sqrt(6) * (z * scale)) / 6;
+			p->map_proj[i][k][1] = ((2 * (k * scale) * cos(a)) - ((i * scale) * cos(a + b))
+					+ (i * scale) * cos(a - b) + (z * scale) * sin(a + b) + (z * scale) * sin(a - b)) / 2;
 			if (p->map_proj[i][k][1] > p->y_max)
 				p->y_max = p->map_proj[i][k][1];
 			if (p->map_proj[i][k][1] < p->y_min)
