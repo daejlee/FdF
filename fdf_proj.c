@@ -61,7 +61,7 @@ void	shoot_proj(fdf_t_info *p)
 
 	i = 0;
 	scale = 900 / p->map_size;
-	a = 0.615472907;
+	a = 0.785398;
 	b = 0.785398;
 	while (i < p->x)
 	{
@@ -69,13 +69,15 @@ void	shoot_proj(fdf_t_info *p)
 		while (k < p->y)
 		{
 			z = p->map_cord[i][k];
-			p->map_proj[i][k][0] = cos(b) * (i * scale) - sin(b) * (z * scale);
+			p->map_proj[i][k][0] = (cos(b) * i - sin(b) * k) * scale;
+			//(cos(b) * i - sin(b) * z) * scale;
 			if (p->map_proj[i][k][0] > p->x_max)
 				p->x_max = p->map_proj[i][k][0];
 			if (p->map_proj[i][k][0] < p->x_min)
 				p->x_min = p->map_proj[i][k][0];
-			p->map_proj[i][k][1] = ((2 * (k * scale) * cos(a)) - ((i * scale) * cos(a + b))
-					+ (i * scale) * cos(a - b) + (z * scale) * sin(a + b) + (z * scale) * sin(a - b)) / 2;
+			p->map_proj[i][k][1] = scale * (k * cos(a + b) + k * cos(a - b) - 2 * z * sin(a) + i * sin(a + b) - i * sin(a - b)) / 2;
+			//scale * ((2 * k * cos(a)) - (i * cos(a + b))
+			//		+ i * cos(a - b) + z * sin(a + b) + z * sin(a - b)) / 2;
 			if (p->map_proj[i][k][1] > p->y_max)
 				p->y_max = p->map_proj[i][k][1];
 			if (p->map_proj[i][k][1] < p->y_min)
