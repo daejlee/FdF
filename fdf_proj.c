@@ -1,6 +1,7 @@
 #include "./fdf.h"
-#include "./minilibx-linux/mlx.h"
-#include "./minilibx-linux/mlx_int.h"
+// #include "./minilibx-linux/mlx.h"
+// #include "./minilibx-linux/mlx_int.h"
+#include "./mlx/mlx.h"
 #include <stdlib.h>
 #include <math.h>
 
@@ -54,13 +55,13 @@ void	shoot_proj(fdf_t_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
-	unsigned int	scale;
+	double			scale;
 	int				z;
 	double			a;
 	double			b;
 
 	i = 0;
-	scale = 900 / p->map_size;
+	scale = 900 / (double)p->map_size;
 	a = 0.785398;
 	b = 0.785398;
 	while (i < p->x)
@@ -125,7 +126,7 @@ void	print_proj(fdf_t_info *p)
 		k = 0;
 		while (k < p->y)
 		{
-			//mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
+			mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
 			con_dots(p, i, k);
 			k++;
 		}
