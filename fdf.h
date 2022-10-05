@@ -24,5 +24,6 @@ int			terminate(fdf_t_info *p);
 void		print_int_arr(fdf_t_info p);
 int			proj(fdf_t_info *p);
 void		*free_tri_arr(fdf_t_info *p);
+void		con_dots(fdf_t_info *p, unsigned int x, unsigned int y);
 
 # endif

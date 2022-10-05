@@ -125,7 +125,7 @@ void	print_proj(fdf_t_info *p)
 		k = 0;
 		while (k < p->y)
 		{
-			mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
+			//mlx_pixel_put(p->mp, p->wp1, p->map_proj[i][k][0], p->map_proj[i][k][1], p->map_color[i][k]);
 			con_dots(p, i, k);
 			k++;
 		}
