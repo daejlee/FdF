@@ -1,6 +1,5 @@
 #include "./fdf.h"
 // #include "./minilibx-linux/mlx.h"
-// #include "./minilibx-linux/mlx_int.h"
 #include "./mlx/mlx.h"
 #include <math.h>
 

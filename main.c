@@ -1,5 +1,4 @@
 // #include "./minilibx-linux/mlx.h"
-// #include "./minilibx-linux/mlx_int.h"
 #include "./mlx/mlx.h"
 #include "./fdf.h"
 #include "./libft_garage/libft/libft.h"
