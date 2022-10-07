@@ -22,7 +22,13 @@ void	init_p(fdf_t_info *p)
 	p->map_size = 0;
 }
 
-// coloring problem -> dot connecting method needs to be revised.
+int	close_window(int keycode, fdf_t_info *p)
+{
+	ft_printf("keycode is %i.\n", keycode);
+	if (keycode == 53)
+		mlx_destroy_window(p->mp, p->wp1);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -35,15 +41,13 @@ int	main(int argc, char **argv)
 		return (err());
 	p.mp = mlx_init();
 	p.wp1 = mlx_new_window(p.mp, 1600, 900, "test");
-	if (!p.mp)
-		return (err());
-	if (!p.wp1)
+	if (!p.mp || !p.wp1)
 		return (err());
 	if (!proj(&p))
 		return (terminate(&p));
 	//print_int_arr(p);
+	mlx_hook(p.wp1, 2, 1L<<0, close_window, &p);
 	mlx_loop(p.mp);
-	mlx_destroy_window(p.mp, p.wp1);
 	terminate(&p);
 	return (0);
 }
