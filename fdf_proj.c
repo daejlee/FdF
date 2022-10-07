@@ -61,8 +61,8 @@ void	shoot_proj(fdf_t_info *p)
 
 	i = 0;
 	scale = 900 / (double)p->map_size;
-	a = 0.785398;
-	b = 0.785398;
+	a = 0.785398; //vertical rot
+	b = -0.785398; //horizental rot
 	while (i < p->x)
 	{
 		k = 0;

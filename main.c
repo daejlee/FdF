@@ -20,9 +20,9 @@ void	init_p(fdf_t_info *p)
 	p->map_proj = NULL;
 	p->map_size = 0;
 }
+
 // when considering map size, z axis must be reflected.
-// we gotta rotate our view
-// linear system needs improvement
+
 int	main(int argc, char **argv)
 {
 	fdf_t_info	p;
