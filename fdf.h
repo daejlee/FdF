@@ -7,6 +7,7 @@ typedef struct s_fdf_info
 	void			*wp1;
 	unsigned int	x;
 	unsigned int	y;
+	int				z_max;
 	int				x_max;
 	int				x_min;
 	int				y_max;

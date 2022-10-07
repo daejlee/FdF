@@ -113,15 +113,13 @@ int	get_map(fdf_t_info *p, char *filename, int fd)
 			else
 				p->map_color[k][i] = 16777215;
 			p->map_cord[k][i] = ft_atoi(temp[k]);
+			if (p->map_cord[k][i] > p->z_max)
+				p->z_max = p->map_cord[k][i];
 			k++;
 		}
 		i++;
 		free_arr(temp);
 	}
-	if (p->x < p-> y)
-		p->map_size = p->y;
-	else
-		p->map_size = p->x;
 	return (1);
 }
 

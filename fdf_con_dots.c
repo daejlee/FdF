@@ -6,7 +6,7 @@
 /*
 . . .	우하단으로 선을 이어서 진행할거임.
 . . .
-. . .		아니 우단이랑 하단만 처리하면 되자나..
+. . .		아니 우단이랑 하단만 처리하면 되자나.. -> 그럼 색상 처리도 그거밖에 안됨.
 */
 
 void	dot_link(fdf_t_info *p, int *from, int *to, int from_color, int to_color)

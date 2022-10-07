@@ -15,13 +15,14 @@ void	init_p(fdf_t_info *p)
 	p->x_min = 0;
 	p->y_max = 0;
 	p->y_min = 0;
+	p->z_max = 0;
 	p->map_cord = NULL;
 	p->map_color = NULL;
 	p->map_proj = NULL;
 	p->map_size = 0;
 }
 
-// when considering map size, z axis must be reflected.
+// coloring problem -> dot connecting method needs to be revised.
 
 int	main(int argc, char **argv)
 {

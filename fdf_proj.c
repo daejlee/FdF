@@ -138,6 +138,12 @@ int	proj(fdf_t_info *p)
 	p->map_proj =  get_proj_slots(p);
 	if (!p->map_proj)
 		return (0);
+	if (p->x >= p->y && (int)p->x > p->z_max)
+		p->map_size = p->x;
+	else if (p->y >= p->x && (int)p->y > p->z_max)
+		p->map_size = p->y;
+	else
+		p->map_size = p->z_max;
 	shoot_proj(p);
 	print_proj(p);
 	return (1);
