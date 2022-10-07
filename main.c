@@ -5,29 +5,18 @@
 #include "./libft_garage/ft_printf/ft_printf.h"
 #include <unistd.h>
 
-void	init_p(fdf_t_info *p)
-{
-	p->mp = NULL;
-	p->wp1 = NULL;
-	p->x = 0;
-	p->y = 0;
-	p->x_max = 0;
-	p->x_min = 0;
-	p->y_max = 0;
-	p->y_min = 0;
-	p->z_max = 0;
-	p->map_cord = NULL;
-	p->map_color = NULL;
-	p->map_proj = NULL;
-	p->map_size = 0;
-}
-
-int	close_window(int keycode, fdf_t_info *p)
+int	key_hook(int keycode, fdf_t_info *p)
 {
 	ft_printf("keycode is %i.\n", keycode);
 	if (keycode == 53)
 		mlx_destroy_window(p->mp, p->wp1);
+	else if (keycode == )
 	return (0);
+}
+
+int	render_frame(fdf_t_info *p)
+{
+	proj(&p);
 }
 
 int	main(int argc, char **argv)
@@ -43,11 +32,9 @@ int	main(int argc, char **argv)
 	p.wp1 = mlx_new_window(p.mp, 1600, 900, "test");
 	if (!p.mp || !p.wp1)
 		return (err());
-	if (!proj(&p))
-		return (terminate(&p));
-	//print_int_arr(p);
-	mlx_hook(p.wp1, 2, 1L<<0, close_window, &p);
+	mlx_loop_hook(p.mp, render_frame, &p);
 	mlx_loop(p.mp);
+	mlx_hook(p.wp1, ON_KEYDOWN, 1L<<0, key_hook, &p);
 	terminate(&p);
 	return (0);
 }

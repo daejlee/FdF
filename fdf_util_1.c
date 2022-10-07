@@ -3,6 +3,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void	init_p(fdf_t_info *p)
+{
+	p->mp = NULL;
+	p->wp1 = NULL;
+	p->x = 0;
+	p->y = 0;
+	p->x_max = 0;
+	p->x_min = 0;
+	p->y_max = 0;
+	p->y_min = 0;
+	p->z_max = 0;
+	p->map_cord = NULL;
+	p->map_color = NULL;
+	p->map_proj = NULL;
+	p->map_size = 0;
+}
+
 int	err(void)
 {
 	perror("fdf error :");
