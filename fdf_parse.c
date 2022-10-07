@@ -56,7 +56,7 @@ int	get_rgb_val(char *str)
 		k = 0;
 		while (hex_idx[k])
 		{
-			if (str[i] == hex_idx[k])
+			if (str[i] == hex_idx[k] || str[i] == ft_tolower(hex_idx[k]))
 			{
 				ret += k * dig;
 				break ;

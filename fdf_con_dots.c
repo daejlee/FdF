@@ -6,7 +6,7 @@
 /*
 . . .	우하단으로 선을 이어서 진행할거임.
 . . .
-. . .		아니 우단이랑 하단만 처리하면 되자나.. -> 그럼 색상 처리도 그거밖에 안됨.
+. . .		아니 우단이랑 하단만 처리하면 되자나..
 */
 
 void	dot_link(fdf_t_info *p, int *from, int *to, int from_color, int to_color)
@@ -25,7 +25,7 @@ void	dot_link(fdf_t_info *p, int *from, int *to, int from_color, int to_color)
 		return ;
 	i = 0;
 	grad = y_offset / x_offset;
-	if (fabs(grad) > 1)
+	if (fabs(y_offset) > fabs(x_offset))
 	{
 		crit_offset = y_offset;
 		grad_color = (to_color - from_color) / y_offset;
@@ -38,42 +38,13 @@ void	dot_link(fdf_t_info *p, int *from, int *to, int from_color, int to_color)
 	}
 	while (i != crit_offset)
 	{
-		color = grad_color * i - grad_color * i + from_color;
+		color = grad_color * i + from_color;
+		//color = 16777215;
 		if (fabs(y_offset) > fabs(x_offset))
 			mlx_pixel_put(p->mp, p->wp1, grad * (from[1] + i) - grad * to[1] + to[0], from[1] + i, color);
 		else
 			mlx_pixel_put(p->mp, p->wp1, from[0] + i, grad * (from[0] + i) - grad * to[0] + to[1], color);
 		if (crit_offset < 0)
-			i--;
-		else
-			i++;
-	}
-}
-
-void	dot_link_ori(fdf_t_info *p, int *from, int *to, int from_color, int to_color)
-{
-	double			x_offset;
-	double			y_offset;
-	int				color;
-	double			grad;
-	int				i;
-	double			grad_color;
-
-	x_offset = to[0] - from[0];
-	y_offset = to[1] - from[1];
-	if (!x_offset)
-		return ;
-	grad = y_offset / x_offset;
-	i = 0;
-	grad_color = (to_color - from_color) / x_offset;
-	while (i != x_offset)
-	{
-		color = grad_color * i - grad_color * i + from_color;
-		mlx_pixel_put(p->mp, p->wp1,
-		from[0] + i,
-		grad * (from[0] + i) - grad * to[0] + to[1],
-		color);
-		if (x_offset < 0)
 			i--;
 		else
 			i++;

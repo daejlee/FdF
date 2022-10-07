@@ -60,8 +60,13 @@ void	shoot_proj(fdf_t_info *p)
 	double			b;
 
 	i = 0;
+	if (p->x >= p->y)
+		p->map_size = p->x;
+	else
+		p->map_size = p->y;
+	p->map_size += p->z_max;
 	scale = 900 / (double)p->map_size;
-	a = 0.785398; //vertical rot
+	a = 0.959931; //vertical rot
 	b = -0.785398; //horizental rot
 	while (i < p->x)
 	{
@@ -138,12 +143,6 @@ int	proj(fdf_t_info *p)
 	p->map_proj =  get_proj_slots(p);
 	if (!p->map_proj)
 		return (0);
-	if (p->x >= p->y && (int)p->x > p->z_max)
-		p->map_size = p->x;
-	else if (p->y >= p->x && (int)p->y > p->z_max)
-		p->map_size = p->y;
-	else
-		p->map_size = p->z_max;
 	shoot_proj(p);
 	print_proj(p);
 	return (1);
