@@ -16,14 +16,22 @@ int	key_hook(int keycode, fdf_t_info *p)
 
 int	render_frame(fdf_t_info *p)
 {
+	mlx_clear_window(p->mp, p->wp1);
 	proj(&p);
 }
+
+// starting view / scale configure
+// parallel projection
+// zoom in / out
+// manipulate z scale
+// map rotation
+// simple UI
 
 int	main(int argc, char **argv)
 {
 	fdf_t_info	p;
 
-	if (argc == 1)
+	if (argc != 2)
 		return (0);
 	init_p(&p);
 	if (!parse_arg(&p, argv))
