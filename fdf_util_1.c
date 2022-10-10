@@ -6,9 +6,11 @@
 void	init_p(fdf_t_info *p)
 {
 	p->mp = NULL;
-	p->wp1 = NULL;
+	p->wp = NULL;
 	p->x = 0;
 	p->y = 0;
+	p->v_angle = 0;
+	p->h_angle = 0;
 	p->x_max = 0;
 	p->x_min = 0;
 	p->y_max = 0;
@@ -44,8 +46,6 @@ int	terminate(fdf_t_info *p)
 			free (p->map_color[i++]);
 		free (p->map_color);
 	}
-	if (p->map_proj)
-		free_tri_arr(p);
 	return (0);
 }
 

@@ -22,28 +22,30 @@ void	dot_link(fdf_t_info *p, int *from, int *to, int from_color, int to_color)
 	x_offset = to[0] - from[0];
 	y_offset = to[1] - from[1];
 	if (!x_offset || !y_offset)
-		return ;
-	i = 0;
-	grad = y_offset / x_offset;
+		grad = 0;
+	else
+		grad = y_offset / x_offset;
 	if (fabs(y_offset) > fabs(x_offset))
 	{
 		crit_offset = y_offset;
 		grad_color = (to_color - from_color) / y_offset;
-		grad = 1 / grad;
+		if (grad)
+			grad = 1 / grad;
 	}
 	else
 	{
 		crit_offset = x_offset;
 		grad_color = (to_color - from_color) / x_offset;
 	}
+	i = 0;
 	while (i != crit_offset)
 	{
 		color = grad_color * i + from_color;
 		//color = 16777215;
 		if (fabs(y_offset) > fabs(x_offset))
-			mlx_pixel_put(p->mp, p->wp1, grad * (from[1] + i) - grad * to[1] + to[0], from[1] + i, color);
+			mlx_pixel_put(p->mp, p->wp, grad * (from[1] + i) - grad * to[1] + to[0], from[1] + i, color);
 		else
-			mlx_pixel_put(p->mp, p->wp1, from[0] + i, grad * (from[0] + i) - grad * to[0] + to[1], color);
+			mlx_pixel_put(p->mp, p->wp, from[0] + i, grad * (from[0] + i) - grad * to[0] + to[1], color);
 		if (crit_offset < 0)
 			i--;
 		else
