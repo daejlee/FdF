@@ -1,39 +1,38 @@
 #include "./mlx/mlx.h"
 #include "./fdf.h"
+#include "./libft_garage/ft_printf/ft_printf.h"
 
 void	kh_turn_perspective(int keycode, fdf_t_info *p)
 {
 	int	prev_h;
 	int	prev_v;
 
-	mlx_clear_window(p->mp, p->wp);
 	prev_h = p->h_angle;
 	prev_v = p->v_angle;
 	free_tri_arr(p);
-	if (keycode == 7) //X
+	if (keycode == 18) //X
 		proj(p, 55, -45);
-	else if (keycode == 6) //Z
+	else if (keycode == 19) //Z
 		proj(p, 0, 0);
-	else if (keycode == 13) //W
+	else if (keycode == 20) //W
 		proj(p, prev_v + 90, prev_h);
-	else if (keycode == 1) //S
+	else if (keycode == 21) //S
 		proj(p, prev_v - 90, prev_h);
-	else if (keycode == 0) //A
+	else if (keycode == 23) //A
 		proj(p, prev_v, prev_h - 90);
-	else if (keycode == 2) //D
+	else if (keycode == 22) //D
 		proj(p, prev_v, prev_h + 90);
 }
 
 void	kh_move_perspective(int keycode, fdf_t_info *p)
 {
-	int	prev_h;
-	int	prev_v;
+	int				prev_h;
+	int				prev_v;
 	unsigned int	i;
 	unsigned int	k;
 	int				x_offset;
 	int				y_offset;
 
-	mlx_clear_window(p->mp, p->wp);
 	prev_h = p->h_angle;
 	prev_v = p->v_angle;
 	x_offset = 0;
@@ -58,6 +57,7 @@ void	kh_move_perspective(int keycode, fdf_t_info *p)
 		}
 		i++;
 	}
+	mlx_clear_window(p->mp, p->wp);
 	print_proj(p);
 }
 
@@ -76,7 +76,7 @@ int	key_hook(int keycode, fdf_t_info *p)
 		kh_turn_perspective(keycode, p);
 	else if (keycode <= 126 && keycode >= 123)
 		kh_move_perspective(keycode, p);
-	else if (ROTATE)
-		kh_rotate_perspective(keycode, p);
+//	else if (ROTATE)
+//		kh_rotate_perspective(keycode, p);
 	return (0);
 }

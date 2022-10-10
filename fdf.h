@@ -42,5 +42,6 @@ int			proj(fdf_t_info *p, int v_rot, int h_rot);
 void		*free_tri_arr(fdf_t_info *p);
 void		con_dots(fdf_t_info *p, unsigned int x, unsigned int y);
 void		print_proj(fdf_t_info *p);
+int			key_hook(int keycode, fdf_t_info *p);
 
 # endif

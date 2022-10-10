@@ -27,15 +27,6 @@ W| 0 1 1 0 E
  y	S
 */
 
-int	render_frame(fdf_t_info *p, int v_rot, int h_rot)
-{
-	
-	if (!proj(p, v_rot, h_rot))
-		return (0);
-	else
-		return (1);
-}
-
 int	mouse_hook(int mouse_code, fdf_t_info *p)
 {
 	double	prev_scale;

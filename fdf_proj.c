@@ -162,6 +162,7 @@ int	proj(fdf_t_info *p, int v_rot, int h_rot)
 	shoot_proj(p);
 	if (p->x_min < 0 || p->y_min < 0)
 		move_proj(p);
+	mlx_clear_window(p->mp, p->wp);
 	print_proj(p);
 	return (1);
 }
