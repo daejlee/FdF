@@ -7,15 +7,17 @@ void	init_p(fdf_t_info *p)
 {
 	p->mp = NULL;
 	p->wp = NULL;
-	p->x = 0;
-	p->y = 0;
 	p->v_angle = 0;
 	p->h_angle = 0;
+	p->z_scale = 1;
+	p->scale = 0;
+	p->x = 0;
+	p->y = 0;
+	p->z_max = 0;
 	p->x_max = 0;
 	p->x_min = 0;
 	p->y_max = 0;
 	p->y_min = 0;
-	p->z_max = 0;
 	p->map_cord = NULL;
 	p->map_color = NULL;
 	p->map_proj = NULL;

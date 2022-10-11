@@ -7,6 +7,9 @@ typedef struct s_fdf_info
 	void			*wp;
 	int				v_angle;
 	int				h_angle;
+	double			v_rad;
+	double			h_rad;
+	double			z_scale;
 	double			scale;
 	unsigned int	x;
 	unsigned int	y;

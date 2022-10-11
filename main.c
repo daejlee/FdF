@@ -1,4 +1,3 @@
-// #include "./minilibx-linux/mlx.h"
 #include "./mlx/mlx.h"
 #include "./fdf.h"
 #include "./libft_garage/libft/libft.h"
@@ -29,9 +28,6 @@ W| 0 1 1 0 E
 
 int	mouse_hook(int mouse_code, fdf_t_info *p)
 {
-	double	prev_scale;
-
-	prev_scale = p->scale;
 	mlx_clear_window(p->mp, p->wp);
 	ft_printf("keycode is %i.\n", mouse_code);
 	if (mouse_code == 3)

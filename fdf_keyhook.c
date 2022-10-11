@@ -2,7 +2,7 @@
 #include "./fdf.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
 
-void	kh_turn_perspective(int keycode, fdf_t_info *p)
+void	kh_turn_view(int keycode, fdf_t_info *p)
 {
 	int	prev_h;
 	int	prev_v;
@@ -24,17 +24,13 @@ void	kh_turn_perspective(int keycode, fdf_t_info *p)
 		proj(p, prev_v, prev_h + 90);
 }
 
-void	kh_move_perspective(int keycode, fdf_t_info *p)
+void	kh_move_view(int keycode, fdf_t_info *p)
 {
-	int				prev_h;
-	int				prev_v;
 	unsigned int	i;
 	unsigned int	k;
 	int				x_offset;
 	int				y_offset;
 
-	prev_h = p->h_angle;
-	prev_v = p->v_angle;
 	x_offset = 0;
 	y_offset = 0;
 	if (keycode == 126) //Up
@@ -61,22 +57,46 @@ void	kh_move_perspective(int keycode, fdf_t_info *p)
 	print_proj(p);
 }
 
-int	key_hook(int keycode, fdf_t_info *p)
+void	kh_rot_view(int keycode, fdf_t_info *p)
 {
 	int	prev_h;
 	int	prev_v;
 
 	prev_h = p->h_angle;
 	prev_v = p->v_angle;
+	free_tri_arr(p);
+	if (keycode == LEFT_ROT)
+		proj(p, prev_v, prev_h + 5);
+	else if (keycode == RIGHT_ROT)
+		proj(p, prev_v, prev_h - 5);
+	else if (keycode == UPPER_ROT)
+		proj(p, prev_v + 5, prev_h);
+	else if (keycode == DOWN_ROT)
+		proj(p, prev_v - 5, prev_h);
+}
+
+void	kh_z_manipulate(int keycode, fdf_t_info *p)
+{
+	if (keycode == Z++)
+		p->z_scale += 5;
+	else
+		p->z_scale -= 5;
+	proj(p, p->v_angle, p->h_angle);
+}
+
+int	key_hook(int keycode, fdf_t_info *p)
+{
 	ft_printf("keycode is %i.\n", keycode);
 	if (keycode == 53) //ESC
 		mlx_destroy_window(p->mp, p->wp);
 	else if (keycode == 7 || keycode == 6 || keycode == 13
 			|| keycode == 1 || keycode == 0 || keycode == 2)
-		kh_turn_perspective(keycode, p);
+		kh_turn_view(keycode, p);
 	else if (keycode <= 126 && keycode >= 123)
-		kh_move_perspective(keycode, p);
-//	else if (ROTATE)
-//		kh_rotate_perspective(keycode, p);
+		kh_move_view(keycode, p);
+	else if (keycode == ROTATE)
+		kh_rot_view(keycode, p);
+	else if (keycode == Z_MANIPULATE)
+		kh_z_manipulate(keycode, p);
 	return (0);
 }
