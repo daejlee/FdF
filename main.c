@@ -26,7 +26,7 @@ W| 0 1 1 0 E
  y	S
 */
 
-int	mouse_hook(int mouse_code, fdf_t_info *p)
+int	mouse_hook(int mouse_code, t_fdf_info *p)
 {
 	mlx_clear_window(p->mp, p->wp);
 	ft_printf("keycode is %i.\n", mouse_code);
@@ -44,7 +44,7 @@ int	mouse_hook(int mouse_code, fdf_t_info *p)
 
 int	main(int argc, char **argv)
 {
-	fdf_t_info	p;
+	t_fdf_info	p;
 
 	if (argc == 1)
 		return (0);

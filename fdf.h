@@ -20,9 +20,9 @@ typedef struct s_fdf_info
 	int				y_min;
 	int				**map_cord;
 	int				**map_color;
-	int				***map_proj; 
+	int				***map_proj;
 	unsigned int	map_size;
-}	fdf_t_info;
+}	t_fdf_info;
 
 enum
 {
@@ -35,16 +35,22 @@ enum
 	ON_DESTROY = 17
 };
 
-int			parse_arg(fdf_t_info *p, char **argv);
+int			parse_arg(t_fdf_info *p, char **argv);
+int			get_col_count(char **temp);
+int			**get_slots(t_fdf_info *p);
+int			get_rgb_val(char *str);
 int			free_arr(char **arr);
-void		init_p(fdf_t_info *p);
+void		init_p(t_fdf_info *p);
 int			err(void);
-int			terminate(fdf_t_info *p);
-void		print_int_arr(fdf_t_info p);
-int			proj(fdf_t_info *p, int v_rot, int h_rot);
-void		*free_tri_arr(fdf_t_info *p);
-void		con_dots(fdf_t_info *p, unsigned int x, unsigned int y);
-void		print_proj(fdf_t_info *p);
-int			key_hook(int keycode, fdf_t_info *p);
+int			terminate(t_fdf_info *p);
+void		print_int_arr(t_fdf_info p);
+int			proj(t_fdf_info *p, int v_rot, int h_rot);
+void		*free_tri_arr(t_fdf_info *p);
+void		con_dots(t_fdf_info *p, unsigned int x, unsigned int y);
+void		print_proj(t_fdf_info *p);
+int			key_hook(int keycode, t_fdf_info *p);
+int			***get_proj_slots(t_fdf_info *p);
+void		init_range(t_fdf_info *p);
+void		renew_range(t_fdf_info *p, int x, int y);
 
-# endif
+#endif

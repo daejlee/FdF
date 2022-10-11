@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	init_p(fdf_t_info *p)
+void	init_p(t_fdf_info *p)
 {
 	p->mp = NULL;
 	p->wp = NULL;
@@ -30,7 +30,7 @@ int	err(void)
 	return (1);
 }
 
-int	terminate(fdf_t_info *p)
+int	terminate(t_fdf_info *p)
 {
 	unsigned int	i;
 
@@ -51,7 +51,7 @@ int	terminate(fdf_t_info *p)
 	return (0);
 }
 
-void	print_int_arr(fdf_t_info p)
+void	print_int_arr(t_fdf_info p)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -102,7 +102,7 @@ int	free_arr(char **arr)
 	return (0);
 }
 
-void	*free_tri_arr(fdf_t_info *p)
+void	*free_tri_arr(t_fdf_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;

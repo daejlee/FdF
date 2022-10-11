@@ -20,57 +20,7 @@ z ---------------------------------------------------------> x
 y
 */
 
-int	***get_proj_slots(fdf_t_info *p)
-{
-	int				***ret;
-	unsigned int	i;
-	unsigned int	k;
-
-	ret = (int ***)malloc(sizeof (int *) * (p->x));
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (i < p->x)
-	{
-		ret[i] = (int **)malloc(sizeof (int *) * p->y);
-		if (!ret[i])
-		{
-			free_arr((char **)ret);
-			return (NULL);
-		}
-		k = 0;
-		while (k < p->y)
-		{
-			ret[i][k] = (int *)malloc(sizeof (int) * 2);
-			if (!ret[i][k++])
-				return (free_tri_arr(p));
-		}
-		i++;
-	}
-	return (ret);
-}
-
-void	init_range(fdf_t_info *p)
-{
-	p->x_max = 0;
-	p->x_min = 0;
-	p->y_max = 0;
-	p->y_min = 0;
-}
-
-void	renew_range(fdf_t_info *p, int x, int y)
-{
-	if (x > p->x_max)
-		p->x_max = x;
-	if (x < p->x_min)
-		p->x_min = x;
-	if (y > p->y_max)
-		p->y_max = y;
-	if (y < p->y_min)
-		p->y_min = y;
-}
-
-void	shoot_proj(fdf_t_info *p)
+static void	shoot_proj(t_fdf_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -84,10 +34,13 @@ void	shoot_proj(fdf_t_info *p)
 		while (k < p->y)
 		{
 			z = p->map_cord[i][k] * p->z_scale;
-			p->map_proj[i][k][0] = (cos(p->h_rad) * i - sin(p->h_rad) * k) * p->scale;
-			p->map_proj[i][k][1] = p->scale * (k * cos(p->p->v_rad + p->h_rad) + k
-			* cos(p->p->v_rad - p->h_rad) - 2 * z * sin(p->p->v_rad) + i
-			* sin(p->p->v_rad + p->h_rad) - i * sin(p->p->v_rad - p->h_rad)) / 2;
+			p->map_proj[i][k][0] = (cos(p->h_rad) * i
+					- sin(p->h_rad) * k) * p->scale;
+			p->map_proj[i][k][1] = p->scale
+				* (k * cos(p->p->v_rad + p->h_rad) + k
+					* cos(p->p->v_rad - p->h_rad) - 2 * z * sin(p->p->v_rad) + i
+					* sin(p->p->v_rad + p->h_rad) - i
+					* sin(p->p->v_rad - p->h_rad)) / 2;
 			renew_range(p, p->map_proj[i][k][0], p->map_proj[i][k][1]);
 			k++;
 		}
@@ -95,7 +48,7 @@ void	shoot_proj(fdf_t_info *p)
 	}
 }
 
-void	move_proj_to_center(fdf_t_info *p)
+static void	move_proj_to_center(t_fdf_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -118,7 +71,7 @@ void	move_proj_to_center(fdf_t_info *p)
 	}
 }
 
-void	move_proj(fdf_t_info *p)
+static void	move_proj(t_fdf_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
@@ -144,11 +97,12 @@ void	move_proj(fdf_t_info *p)
 	move_proj_to_center(p);
 }
 
-void	print_proj(fdf_t_info *p)
+void	print_proj(t_fdf_info *p)
 {
 	unsigned int	i;
 	unsigned int	k;
 
+	mlx_clear_window(p->mp, p->wp);
 	i = 0;
 	while (i < p->x)
 	{
@@ -156,7 +110,7 @@ void	print_proj(fdf_t_info *p)
 		while (k < p->y)
 		{
 			mlx_pixel_put(p->mp, p->wp, p->map_proj[i][k][0],
-					p->map_proj[i][k][1], p->map_color[i][k]);
+				p->map_proj[i][k][1], p->map_color[i][k]);
 			con_dots(p, i, k);
 			k++;
 		}
@@ -164,9 +118,9 @@ void	print_proj(fdf_t_info *p)
 	}
 }
 
-int	proj(fdf_t_info *p, int v_rot, int h_rot)
+int	proj(t_fdf_info *p, int v_rot, int h_rot)
 {
-	p->map_proj =  get_proj_slots(p);
+	p->map_proj = get_proj_slots(p);
 	if (!p->map_proj)
 		return (0);
 	p->v_angle = v_rot;
@@ -176,7 +130,6 @@ int	proj(fdf_t_info *p, int v_rot, int h_rot)
 	shoot_proj(p);
 	if (p->x_min < 0 || p->y_min < 0)
 		move_proj(p);
-	mlx_clear_window(p->mp, p->wp);
 	print_proj(p);
 	return (1);
 }
