@@ -15,7 +15,13 @@ parallel projection
 // zoom in / out
 // manipulate z scale
 // map rotation
-// simple UI
+/* simple UI
+map name
+map size (x, y)
+x, y offset
+scale
+rot deg
+z manipulation
 
 	N
  z ----->x
