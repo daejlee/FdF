@@ -9,26 +9,24 @@
 /*   Updated: 2022/10/13 18:34:43 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "./mlx/mlx.h"
 #include "./fdf.h"
 #include "./libft_garage/libft/libft.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
 #include <unistd.h>
 
+enum
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 /*
-starting view / scale configure
- -> For now, scale itself is a bit small.
- we can just adjust starting point to the middle of the screen. DONE
-
-parallel projection
--> E, W, S, N, Z. DONE
-
-// zoom in / out -> DONE
-// manipulate z scale -> DONE
-// map rotation -> DONE
-
-
 	N
  z ----->x
  | 0 0 0 0
@@ -77,8 +75,7 @@ int	main(int argc, char **argv)
 	proj(&p, 55, -45);
 	//mlx_loop_hook(p.mp, render_frame, &p);
 	mlx_key_hook(p.wp, key_hook, &p);
-	//mlx_mouse_hook(p.wp, mouse_hook, &p);
-	mlx_hook(p.wp, 17, 1L<<0, mlx_destroy_window, &p);
+	mlx_hook(p.wp, ON_DESTROY, 1L<<0, mlx_destroy_window, &p);
 	mlx_loop(p.mp);
 	terminate(&p);
 	return (0);

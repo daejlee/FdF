@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 18:42:00 by daejlee           #+#    #+#             */
+/*   Updated: 2022/10/13 18:42:10 by daejlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef FDF_H
 # define FDF_H
 
@@ -28,16 +39,6 @@ typedef struct s_fdf_info
 	int				y_offset;
 }	t_fdf_info;
 
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
 
 int			parse_arg(t_fdf_info *p, char **argv);
 int			get_col_count(char **temp);

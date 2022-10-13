@@ -9,7 +9,6 @@
 /*   Updated: 2022/10/13 18:34:12 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "./libft_garage/gnl/get_next_line.h"
 #include "./libft_garage/libft/libft.h"
 #include "./fdf.h"

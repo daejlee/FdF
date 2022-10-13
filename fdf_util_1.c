@@ -9,7 +9,6 @@
 /*   Updated: 2022/10/13 18:34:33 by daejlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "./fdf.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
 #include <stdio.h>
