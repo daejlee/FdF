@@ -5,6 +5,7 @@
 
 void	init_p(t_fdf_info *p)
 {
+	p->map_name = NULL;
 	p->mp = NULL;
 	p->wp = NULL;
 	p->v_angle = 0;
@@ -22,6 +23,8 @@ void	init_p(t_fdf_info *p)
 	p->map_color = NULL;
 	p->map_proj = NULL;
 	p->map_size = 0;
+	p->x_offset = 0;
+	p->y_offset = 0;
 }
 
 int	err(void)

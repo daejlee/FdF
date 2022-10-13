@@ -3,6 +3,7 @@
 
 typedef struct s_fdf_info
 {
+	char			*map_name;
 	void			*mp;
 	void			*wp;
 	int				v_angle;
@@ -10,6 +11,7 @@ typedef struct s_fdf_info
 	double			v_rad;
 	double			h_rad;
 	double			z_scale;
+	double			init_scale;
 	double			scale;
 	unsigned int	x;
 	unsigned int	y;
@@ -22,6 +24,8 @@ typedef struct s_fdf_info
 	int				**map_color;
 	int				***map_proj;
 	unsigned int	map_size;
+	int				x_offset;
+	int				y_offset;
 }	t_fdf_info;
 
 enum
@@ -52,5 +56,6 @@ int			key_hook(int keycode, t_fdf_info *p);
 int			***get_proj_slots(t_fdf_info *p);
 void		init_range(t_fdf_info *p);
 void		renew_range(t_fdf_info *p, int x, int y);
+void		put_panel(t_fdf_info *p);
 
 #endif

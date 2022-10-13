@@ -15,13 +15,7 @@ parallel projection
 // zoom in / out -> DONE
 // manipulate z scale -> DONE
 // map rotation -> DONE
-simple UI
-map name
-map size (x, y)
-x, y offset
-scale
-rot deg
-z manipulation
+
 
 	N
  z ----->x
@@ -67,6 +61,7 @@ int	main(int argc, char **argv)
 		p.map_size = p.y;
 	p.map_size += p.z_max;
 	p.scale = 900 / (double)p.map_size;
+	p.init_scale = p.scale;
 	proj(&p, 55, -45);
 	//mlx_loop_hook(p.mp, render_frame, &p);
 	mlx_key_hook(p.wp, key_hook, &p);

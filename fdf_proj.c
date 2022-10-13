@@ -102,6 +102,7 @@ void	print_proj(t_fdf_info *p)
 	unsigned int	k;
 
 	mlx_clear_window(p->mp, p->wp);
+	put_panel(p);
 	i = 0;
 	while (i < p->x)
 	{

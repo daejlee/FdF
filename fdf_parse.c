@@ -93,5 +93,6 @@ int	parse_arg(t_fdf_info *p, char **argv)
 	}
 	if (!get_map(p, argv[1], fd))
 		return (0);
+	p->map_name = argv[1];
 	return (1);
 }

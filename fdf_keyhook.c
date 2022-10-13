@@ -57,6 +57,8 @@ void	kh_move_view(int keycode, t_fdf_info *p)
 		}
 		i++;
 	}
+	p->x_offset += x_offset;
+	p->y_offset += y_offset;
 	print_proj(p);
 }
 
@@ -96,9 +98,9 @@ int	key_hook(int keycode, t_fdf_info *p)
 		else if (keycode == 45) //M
 			p->z_scale *= 0.5;
 		else if (keycode == 24) //+
-			p->scale *= 1.5;
+			p->scale *= 2;
 		else //-
-			p->scale *= 0.7;
+			p->scale *= 0.5;
 		proj(p, p->v_angle, p->h_angle);
 	}
 	return (0);
