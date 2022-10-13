@@ -12,10 +12,10 @@ starting view / scale configure
 parallel projection
 -> E, W, S, N, Z. DONE
 
-// zoom in / out
-// manipulate z scale
-// map rotation
-/* simple UI
+// zoom in / out -> DONE
+// manipulate z scale -> DONE
+// map rotation -> DONE
+simple UI
 map name
 map size (x, y)
 x, y offset

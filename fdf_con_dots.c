@@ -62,11 +62,11 @@ void	con_dots(t_fdf_info *p, unsigned int x, unsigned int y)
 	int	color_arr[2];
 
 	color_arr[0] = p->map_color[x][y];
-	color_arr[1] = p->map_color[x + 1][y];
 	if (x == p->x - 1 && y == p->y - 1) // 우하단
 		return ;
 	else if (y == p->y - 1) // 하단
 	{
+		color_arr[1] = p->map_color[x + 1][y];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x + 1][y],
 			color_arr);
 	}
@@ -78,6 +78,7 @@ void	con_dots(t_fdf_info *p, unsigned int x, unsigned int y)
 	}
 	else
 	{
+		color_arr[1] = p->map_color[x + 1][y];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x + 1][y],
 			color_arr);
 		color_arr[1] = p->map_color[x][y + 1];

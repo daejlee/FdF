@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static int	get_map_b_seg(t_fdf_info *p, char **temp, unsigned int i)
+static void	get_map_b_seg(t_fdf_info *p, char **temp, unsigned int i)
 {
 	unsigned int	k;
 
@@ -27,7 +27,7 @@ static int	get_map_b_seg(t_fdf_info *p, char **temp, unsigned int i)
 	}
 }
 
-static int	get_map_a_seg(t_fdf_info *p, int fd)
+static void	get_map_a_seg(t_fdf_info *p, int fd)
 {
 	char			**temp;
 	char			*gnl_temp;
@@ -44,7 +44,7 @@ static int	get_map_a_seg(t_fdf_info *p, int fd)
 		{
 			free_arr((char **)p->map_color);
 			free_arr((char **)p->map_cord);
-			return (0);
+			return ;
 		}
 		get_map_b_seg(p, temp, i);
 		i++;

@@ -37,10 +37,10 @@ static void	shoot_proj(t_fdf_info *p)
 			p->map_proj[i][k][0] = (cos(p->h_rad) * i
 					- sin(p->h_rad) * k) * p->scale;
 			p->map_proj[i][k][1] = p->scale
-				* (k * cos(p->p->v_rad + p->h_rad) + k
-					* cos(p->p->v_rad - p->h_rad) - 2 * z * sin(p->p->v_rad) + i
-					* sin(p->p->v_rad + p->h_rad) - i
-					* sin(p->p->v_rad - p->h_rad)) / 2;
+				* (k * cos(p->v_rad + p->h_rad) + k
+					* cos(p->v_rad - p->h_rad) - 2 * z * sin(p->v_rad) + i
+					* sin(p->v_rad + p->h_rad) - i
+					* sin(p->v_rad - p->h_rad)) / 2;
 			renew_range(p, p->map_proj[i][k][0], p->map_proj[i][k][1]);
 			k++;
 		}
@@ -94,7 +94,6 @@ static void	move_proj(t_fdf_info *p)
 		}
 		i++;
 	}
-	move_proj_to_center(p);
 }
 
 void	print_proj(t_fdf_info *p)
@@ -130,6 +129,7 @@ int	proj(t_fdf_info *p, int v_rot, int h_rot)
 	shoot_proj(p);
 	if (p->x_min < 0 || p->y_min < 0)
 		move_proj(p);
+	move_proj_to_center(p);
 	print_proj(p);
 	return (1);
 }

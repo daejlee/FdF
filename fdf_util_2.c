@@ -15,7 +15,10 @@ int	***get_proj_slots(t_fdf_info *p)
 	{
 		ret[i] = (int **)malloc(sizeof (int *) * p->y);
 		if (!ret[i])
-			return ((void *)free_arr((char **)ret));
+		{
+			free_arr((char **)ret);
+			return (NULL);
+		}
 		k = 0;
 		while (k < p->y)
 		{
