@@ -35,34 +35,42 @@ W| 0 1 1 0 E
  | 0 0 0 0
  y	S
 */
-
-int	mouse_hook(int mouse_code, t_fdf_info *p)
+int	terminate(t_fdf_info *p)
 {
-	mlx_clear_window(p->mp, p->wp);
-	ft_printf("keycode is %i.\n", mouse_code);
-	if (mouse_code == 3)
-		p->scale = 900 / (double)p->map_size;
-	else if (mouse_code == 4)
-		p->scale *= 10;
-	else if (mouse_code == 5)
-		p->scale *= 0.1;
-	else
-		return (1);
-	proj(p, p->v_angle, p->h_angle);
+	unsigned int	i;
+
+	mlx_destroy_window(p->mp, p->wp);
+	i = 0;
+	if (p->map_cord)
+	{
+		while (i < p->x)
+			free (p->map_cord[i++]);
+		free (p->map_cord);
+	}
+	i = 0;
+	if (p->map_color)
+	{
+		while (i < p->x)
+			free (p->map_color[i++]);
+		free (p->map_color);
+	}
+	system("leaks fdf");
+	exit (0);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_fdf_info	p;
+	t_fdf_panel	l;
 
 	if (argc == 1)
 		return (0);
-	init_p(&p);
+	init_p(&p, &l);
 	if (argc != 2 || !parse_arg(&p, argv))
 		return (err());
 	p.mp = mlx_init();
-	p.wp = mlx_new_window(p.mp, 1600, 900, "test");
+	p.wp = mlx_new_window(p.mp, 1600, 900, "fdf");
 	if (!p.mp || !p.wp)
 		return (err());
 	if (p.x >= p.y)
@@ -73,10 +81,8 @@ int	main(int argc, char **argv)
 	p.scale = 900 / (double)p.map_size;
 	p.init_scale = p.scale;
 	proj(&p, 55, -45);
-	//mlx_loop_hook(p.mp, render_frame, &p);
-	mlx_key_hook(p.wp, key_hook, &p);
-	mlx_hook(p.wp, ON_DESTROY, 1L<<0, mlx_destroy_window, &p);
+	mlx_hook(p.wp, ON_DESTROY, 0, terminate, &p);
+	mlx_hook(p.wp, ON_KEYDOWN, 0, key_hook, &p);
 	mlx_loop(p.mp);
-	terminate(&p);
 	return (0);
 }

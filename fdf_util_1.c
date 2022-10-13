@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	init_p(t_fdf_info *p)
+void	init_p(t_fdf_info *p, t_fdf_panel *l)
 {
 	p->map_name = NULL;
 	p->mp = NULL;
@@ -36,33 +36,13 @@ void	init_p(t_fdf_info *p)
 	p->map_size = 0;
 	p->x_offset = 0;
 	p->y_offset = 0;
+	p->l_addr = l;
 }
 
 int	err(void)
 {
 	perror("fdf error :");
 	return (1);
-}
-
-int	terminate(t_fdf_info *p)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (p->map_cord)
-	{
-		while (i < p->x)
-			free (p->map_cord[i++]);
-		free (p->map_cord);
-	}
-	i = 0;
-	if (p->map_color)
-	{
-		while (i < p->x)
-			free (p->map_color[i++]);
-		free (p->map_color);
-	}
-	return (0);
 }
 
 void	print_int_arr(t_fdf_info p)

@@ -118,7 +118,7 @@ int	key_hook(int keycode, t_fdf_info *p)
 {
 	ft_printf("keycode is %i.\n", keycode);
 	if (keycode == ESC)
-		mlx_destroy_window(p->mp, p->wp);
+		terminate(p);
 	else if (keycode >= ONE && keycode <= FIVE)
 		kh_turn_view(keycode, p);
 	else if (keycode <= DOWN && keycode >= LEFT)

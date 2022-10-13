@@ -12,6 +12,19 @@
 #ifndef FDF_H
 # define FDF_H
 
+typedef struct s_fdf_panel
+{
+	char	*map_name;
+	char	*x_size;
+	char	*y_size;
+	char	*x_offset;
+	char	*y_offset;
+	char	*map_zoom;
+	char	*h_rot_deg;
+	char	*v_rot_deg;
+	char	*z_zoom;
+}	t_fdf_panel;
+
 typedef struct s_fdf_info
 {
 	char			*map_name;
@@ -37,6 +50,7 @@ typedef struct s_fdf_info
 	unsigned int	map_size;
 	int				x_offset;
 	int				y_offset;
+	t_fdf_panel		*l_addr;
 }	t_fdf_info;
 
 
@@ -45,7 +59,7 @@ int			get_col_count(char **temp);
 int			**get_slots(t_fdf_info *p);
 int			get_rgb_val(char *str);
 int			free_arr(char **arr);
-void		init_p(t_fdf_info *p);
+void		init_p(t_fdf_info *p, t_fdf_panel *l);
 int			err(void);
 int			terminate(t_fdf_info *p);
 void		print_int_arr(t_fdf_info p);
@@ -58,5 +72,6 @@ int			***get_proj_slots(t_fdf_info *p);
 void		init_range(t_fdf_info *p);
 void		renew_range(t_fdf_info *p, int x, int y);
 void		put_panel(t_fdf_info *p);
+int			purge_l(t_fdf_panel *l);
 
 #endif
