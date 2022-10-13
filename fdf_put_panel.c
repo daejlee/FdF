@@ -54,6 +54,8 @@ int	purge_l(t_fdf_panel *l)
 		free(l->x_offset);
 	if (l->y_offset)
 		free(l->y_offset);
+	if (l->map_zoom)
+		free(l->map_zoom);
 	if (l->h_rot_deg)
 		free(l->h_rot_deg);
 	if (l->v_rot_deg)
