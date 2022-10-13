@@ -13,9 +13,12 @@ typedef struct s_fdf_panel
 	char	*h_rot_deg;
 	char	*v_rot_deg;
 	char	*z_zoom;
+	char	*rot_how;
+	char	*map_zoom_how;
+	char	*z_zoom_how;
 }	t_fdf_panel;
 
-static void	init_l(t_fdf_panel *l, t_fdf_info *p)
+static int	init_l(t_fdf_panel *l, t_fdf_info *p)
 {
 	double	scale_ratio;
 
@@ -29,20 +32,30 @@ static void	init_l(t_fdf_panel *l, t_fdf_info *p)
 	l->h_rot_deg = ft_strjoin("rotated deg(horizental): ", ft_itoa(p->h_angle));
 	l->v_rot_deg = ft_strjoin("rotated deg(vertical): ", ft_itoa(p->v_angle));
 	l->z_zoom = ft_strjoin("z zoom rate: ", ft_itoa((int)p->z_scale));
+	// if (err)
+	// 	return (0);
+	// else
+	return (1);
 }
 
 void	put_panel(t_fdf_info *p)
 {
 	t_fdf_panel	l;
 
-	init_l(&l, p);
-	mlx_string_put(p->mp, p->wp, 100, 100, 10040319, l.map_name);
-	mlx_string_put(p->mp, p->wp, 100, 125, 10040319, l.x_size);
-	mlx_string_put(p->mp, p->wp, 100, 150, 10040319, l.y_size);
-	mlx_string_put(p->mp, p->wp, 100, 175, 10040319, l.x_offset);
-	mlx_string_put(p->mp, p->wp, 100, 200, 10040319, l.y_offset);
-	mlx_string_put(p->mp, p->wp, 100, 225, 10040319, l.map_zoom);
-	mlx_string_put(p->mp, p->wp, 100, 250, 10040319, l.h_rot_deg);
-	mlx_string_put(p->mp, p->wp, 100, 275, 10040319, l.v_rot_deg);
-	mlx_string_put(p->mp, p->wp, 100, 300, 10040319, l.z_zoom);
+	if (!init_l(&l, p))
+		return ;
+	mlx_string_put(p->mp, p->wp, 50, 0, 10040319, "isometric view: 1");
+	mlx_string_put(p->mp, p->wp, 50, 25, 10040319, "parallel view: 2 ~ 6");
+	mlx_string_put(p->mp, p->wp, 300, 25, 10040319, "move map: keyboard cursors");
+	mlx_string_put(p->mp, p->wp, 50, 50, 10040319, "rotate map: W A S D");
+	mlx_string_put(p->mp, p->wp, 300, 50, 10040319, "zoom map: =, -, N, M");
+	mlx_string_put(p->mp, p->wp, 50, 100, 10040319, l.map_name);
+	mlx_string_put(p->mp, p->wp, 50, 125, 10040319, l.x_size);
+	mlx_string_put(p->mp, p->wp, 50, 150, 10040319, l.y_size);
+	mlx_string_put(p->mp, p->wp, 50, 175, 10040319, l.x_offset);
+	mlx_string_put(p->mp, p->wp, 50, 200, 10040319, l.y_offset);
+	mlx_string_put(p->mp, p->wp, 50, 225, 10040319, l.map_zoom);
+	mlx_string_put(p->mp, p->wp, 50, 250, 10040319, l.h_rot_deg);
+	mlx_string_put(p->mp, p->wp, 50, 275, 10040319, l.v_rot_deg);
+	mlx_string_put(p->mp, p->wp, 50, 300, 10040319, l.z_zoom);
 }
