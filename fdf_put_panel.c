@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_put_panel.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daejlee <daejlee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/13 18:34:28 by daejlee           #+#    #+#             */
+/*   Updated: 2022/10/13 18:34:28 by daejlee          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./libft_garage/libft/libft.h"
 #include "./fdf.h"
 #include "./mlx/mlx.h"
@@ -13,10 +25,28 @@ typedef struct s_fdf_panel
 	char	*h_rot_deg;
 	char	*v_rot_deg;
 	char	*z_zoom;
-	char	*rot_how;
-	char	*map_zoom_how;
-	char	*z_zoom_how;
 }	t_fdf_panel;
+
+static int	purge_l(t_fdf_panel *l)
+{
+	if (l->map_name)
+		free(l->map_name);
+	if (l->x_size)
+		free(l->x_size);
+	if (l->y_size)
+		free(l->y_size);
+	if (l->x_offset)
+		free(l->x_offset);
+	if (l->y_offset)
+		free(l->y_offset);
+	if (l->h_rot_deg)
+		free(l->h_rot_deg);
+	if (l->v_rot_deg)
+		free(l->v_rot_deg);
+	if (l->z_zoom)
+		free(l->z_zoom);
+	return (0);
+}
 
 static int	init_l(t_fdf_panel *l, t_fdf_info *p)
 {
@@ -32,10 +62,12 @@ static int	init_l(t_fdf_panel *l, t_fdf_info *p)
 	l->h_rot_deg = ft_strjoin("rotated deg(horizental): ", ft_itoa(p->h_angle));
 	l->v_rot_deg = ft_strjoin("rotated deg(vertical): ", ft_itoa(p->v_angle));
 	l->z_zoom = ft_strjoin("z zoom rate: ", ft_itoa((int)p->z_scale));
-	// if (err)
-	// 	return (0);
-	// else
-	return (1);
+	if (!l->map_name || !l->x_size || !l->y_size || !l->x_offset
+			|| !l->y_offset || !l->map_zoom || !l->h_rot_deg
+			|| !l->v_rot_deg || !l->z_zoom)
+		return (purge_l(l));
+	else
+		return (1);
 }
 
 void	put_panel(t_fdf_info *p)
@@ -58,4 +90,5 @@ void	put_panel(t_fdf_info *p)
 	mlx_string_put(p->mp, p->wp, 50, 250, 10040319, l.h_rot_deg);
 	mlx_string_put(p->mp, p->wp, 50, 275, 10040319, l.v_rot_deg);
 	mlx_string_put(p->mp, p->wp, 50, 300, 10040319, l.z_zoom);
+	purge_l(&l);
 }
