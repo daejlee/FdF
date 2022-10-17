@@ -38,7 +38,7 @@ static void	get_map_b_seg(t_fdf_info *p, char **temp, unsigned int i)
 	}
 }
 
-static void	get_map_a_seg(t_fdf_info *p, int fd)
+static int	get_map_a_seg(t_fdf_info *p, int fd)
 {
 	char			**temp;
 	char			*gnl_temp;
@@ -55,12 +55,13 @@ static void	get_map_a_seg(t_fdf_info *p, int fd)
 		{
 			free_arr((char **)p->map_color);
 			free_arr((char **)p->map_cord);
-			return ;
+			return (0);
 		}
 		get_map_b_seg(p, temp, i);
 		i++;
 		free_arr(temp);
 	}
+	return (1);
 }
 
 static int	get_map(t_fdf_info *p, char *filename, int fd)
@@ -76,8 +77,7 @@ static int	get_map(t_fdf_info *p, char *filename, int fd)
 	}
 	close(fd);
 	fd = open(filename, O_RDONLY);
-	get_map_a_seg(p, fd);
-	return (1);
+	return (get_map_a_seg(p, fd));
 }
 
 int	parse_arg(t_fdf_info *p, char **argv)
@@ -102,8 +102,6 @@ int	parse_arg(t_fdf_info *p, char **argv)
 		gnl_temp = get_next_line(fd);
 		p->y += 1;
 	}
-	if (!get_map(p, argv[1], fd))
-		return (0);
 	p->map_name = argv[1];
-	return (1);
+	return (get_map(p, argv[1], fd));
 }

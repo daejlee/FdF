@@ -70,30 +70,28 @@ void	dot_link(t_fdf_info *p, int *from, int *to, int *color_arr)
 
 void	con_dots(t_fdf_info *p, unsigned int x, unsigned int y)
 {
-	int	color_arr[2];
-
-	color_arr[0] = p->map_color[x][y];
-	if (x == p->x - 1 && y == p->y - 1) // 우하단
+	p->color_arr[0] = p->map_color[x][y];
+	if (x == p->x - 1 && y == p->y - 1)
 		return ;
-	else if (y == p->y - 1) // 하단
+	else if (y == p->y - 1)
 	{
-		color_arr[1] = p->map_color[x + 1][y];
+		p->color_arr[1] = p->map_color[x + 1][y];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x + 1][y],
-			color_arr);
+			p->color_arr);
 	}
-	else if (x == p->x - 1) // 우단
+	else if (x == p->x - 1)
 	{
-		color_arr[1] = p->map_color[x][y +1];
+		p->color_arr[1] = p->map_color[x][y +1];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x][y + 1],
-			color_arr);
+			p->color_arr);
 	}
 	else
 	{
-		color_arr[1] = p->map_color[x + 1][y];
+		p->color_arr[1] = p->map_color[x + 1][y];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x + 1][y],
-			color_arr);
-		color_arr[1] = p->map_color[x][y + 1];
+			p->color_arr);
+		p->color_arr[1] = p->map_color[x][y + 1];
 		dot_link(p, p->map_proj[x][y], p->map_proj[x][y + 1],
-			color_arr);
+			p->color_arr);
 	}
 }

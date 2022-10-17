@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 #include "./mlx/mlx.h"
 #include "./fdf.h"
-#include "./libft_garage/ft_printf/ft_printf.h"
 
 enum
 {
@@ -36,6 +35,27 @@ enum
 	MINUS = 27
 };
 
+# ifndef LINUX
+#  define LINUX
+#  define KEY_A	0
+#  define KEY_S	1
+#  define KEY_D 2
+#  define KEY_Q	12
+#  define KEY_W	13
+#  define KEY_E	14
+#  define KEY_UP	126
+#  define KEY_DOWN	125
+#  define KEY_LEFT	123
+#  define KEY_RIGHT 124
+#  define KEY_ESC	53
+# else
+#  define KEY_UP	65362
+#  define KEY_DOWN	65364
+#  define KEY_LEFT	65361
+#  define KEY_RIGHT	65363
+#  define KEY_ESC	65307
+# endif
+
 void	kh_turn_view(int keycode, t_fdf_info *p)
 {
 	int	prev_h;
@@ -44,29 +64,29 @@ void	kh_turn_view(int keycode, t_fdf_info *p)
 	prev_h = p->h_angle;
 	prev_v = p->v_angle;
 	free_tri_arr(p);
-	if (keycode == ONE) //1
+	if (keycode == ONE)
 		proj(p, 55, -45);
-	else if (keycode == TWO) //2 Above
+	else if (keycode == TWO)
 		proj(p, 0, 0);
-	else if (keycode == THREE) //3 S
+	else if (keycode == THREE)
 		proj(p, 90, 0);
-	else if (keycode == FOUR) //4 N
+	else if (keycode == FOUR)
 		proj(p, 90, 180);
-	else if (keycode == FIVE) //5 E
+	else if (keycode == FIVE)
 		proj(p, 90, 90);
-	else if (keycode == SIX) //6 W
+	else if (keycode == SIX)
 		proj(p, 90, -90);
 }
 
 void	kh_get_offset(int keycode, int *x_offset, int *y_offset)
 {
-	if (keycode == UP) //Up cursor
+	if (keycode == UP)
 		*y_offset = 100;
-	else if (keycode == DOWN) //Down cursor
+	else if (keycode == DOWN)
 		*y_offset = -100;
-	else if (keycode == LEFT) //Left cursor
+	else if (keycode == LEFT)
 		*x_offset = -100;
-	else if (keycode == RIGHT) //Right cursor
+	else if (keycode == RIGHT)
 		*x_offset = 100;
 }
 
@@ -116,7 +136,6 @@ void	kh_rot_view(int keycode, t_fdf_info *p)
 
 int	key_hook(int keycode, t_fdf_info *p)
 {
-	ft_printf("keycode is %i.\n", keycode);
 	if (keycode == ESC)
 		terminate(p);
 	else if (keycode >= ONE && keycode <= FIVE)
@@ -125,7 +144,8 @@ int	key_hook(int keycode, t_fdf_info *p)
 		kh_move_view(keycode, p);
 	else if (keycode == A || keycode == D || keycode == W || keycode == S)
 		kh_rot_view(keycode, p);
-	else if (keycode == N || keycode == M || keycode == PLUS || keycode == MINUS)
+	else if (keycode == N || keycode == M || keycode == PLUS
+		|| keycode == MINUS)
 	{
 		if (keycode == N)
 			p->z_scale *= 2;
@@ -135,6 +155,7 @@ int	key_hook(int keycode, t_fdf_info *p)
 			p->scale *= 2;
 		else
 			p->scale *= 0.5;
+		free_tri_arr(p);
 		proj(p, p->v_angle, p->h_angle);
 	}
 	return (0);

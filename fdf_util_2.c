@@ -12,15 +12,11 @@
 #include "./fdf.h"
 #include <stdlib.h>
 
-int	***get_proj_slots(t_fdf_info *p)
+static int	get_proj_slots_seg(t_fdf_info *p, int ***ret)
 {
-	int				***ret;
 	unsigned int	i;
 	unsigned int	k;
 
-	ret = (int ***)malloc(sizeof (int *) * (p->x));
-	if (!ret)
-		return (NULL);
 	i = 0;
 	while (i < p->x)
 	{
@@ -28,17 +24,32 @@ int	***get_proj_slots(t_fdf_info *p)
 		if (!ret[i])
 		{
 			free_arr((char **)ret);
-			return (NULL);
+			return (0);
 		}
 		k = 0;
 		while (k < p->y)
 		{
 			ret[i][k] = (int *)malloc(sizeof (int) * 2);
 			if (!ret[i][k++])
-				return (free_tri_arr(p));
+			{
+				free_tri_arr(p);
+				return (0);
+			}
 		}
 		i++;
 	}
+	return (1);
+}
+
+int	***get_proj_slots(t_fdf_info *p)
+{
+	int				***ret;
+
+	ret = (int ***)malloc(sizeof (int *) * (p->x));
+	if (!ret)
+		return (NULL);
+	if (!get_proj_slots_seg(p, ret))
+		return (NULL);
 	return (ret);
 }
 

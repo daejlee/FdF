@@ -10,34 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "./fdf.h"
+#include "./mlx/mlx.h"
 #include "./libft_garage/ft_printf/ft_printf.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-void	init_p(t_fdf_info *p, t_fdf_panel *l)
-{
-	p->map_name = NULL;
-	p->mp = NULL;
-	p->wp = NULL;
-	p->v_angle = 0;
-	p->h_angle = 0;
-	p->z_scale = 1;
-	p->scale = 0;
-	p->x = 0;
-	p->y = 0;
-	p->z_max = 0;
-	p->x_max = 0;
-	p->x_min = 0;
-	p->y_max = 0;
-	p->y_min = 0;
-	p->map_cord = NULL;
-	p->map_color = NULL;
-	p->map_proj = NULL;
-	p->map_size = 0;
-	p->x_offset = 0;
-	p->y_offset = 0;
-	p->l_addr = l;
-}
 
 int	err(void)
 {
@@ -45,44 +21,27 @@ int	err(void)
 	return (1);
 }
 
-void	print_int_arr(t_fdf_info p)
+int	terminate(t_fdf_info *p)
 {
 	unsigned int	i;
-	unsigned int	k;
 
+	mlx_destroy_window(p->mp, p->wp);
 	i = 0;
-	while (i < p.y)
+	if (p->map_cord)
 	{
-		k = 0;
-		while (k < p.x)
-			ft_printf("%i ", p.map_cord[k++][i]);
-		ft_printf("\n");
-		i++;
+		while (i < p->x)
+			free (p->map_cord[i++]);
+		free (p->map_cord);
 	}
-	ft_printf("---------------------------------------------------------------\n");
 	i = 0;
-	while (i < p.y)
+	if (p->map_color)
 	{
-		k = 0;
-		while (k < p.x)
-			ft_printf("%i ", p.map_color[k++][i]);
-		ft_printf("\n");
-		i++;
+		while (i < p->x)
+			free (p->map_color[i++]);
+		free (p->map_color);
 	}
-	ft_printf("---------------------------------------------------------------\n");
-	i = 0;
-	while (i < p.y)
-	{
-		k = 0;
-		while (k < p.x)
-		{
-			ft_printf("%i,", p.map_proj[k][i][0]);
-			ft_printf("%i ", p.map_proj[k++][i][1]);
-		}
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("---------------------------------------------------------------\n");
+	exit (0);
+	return (0);
 }
 
 int	free_arr(char **arr)
