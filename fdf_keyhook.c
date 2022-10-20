@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 #include "./mlx/mlx.h"
 #include "./fdf.h"
-
+#include <stdio.h> //for keycode 파악
+/*
 enum
 {
 	ONE = 18,
@@ -34,35 +35,32 @@ enum
 	PLUS = 24,
 	MINUS = 27
 };
-
-# ifndef LINUX
-#  define LINUX
-#  define KEY_A	0
-#  define KEY_S	1
-#  define KEY_D 2
-#  define KEY_Q	12
-#  define KEY_W	13
-#  define KEY_E	14
-#  define KEY_UP	126
-#  define KEY_DOWN	125
-#  define KEY_LEFT	123
-#  define KEY_RIGHT 124
-#  define KEY_ESC	53
-# else
-#  define KEY_UP	65362
-#  define KEY_DOWN	65364
-#  define KEY_LEFT	65361
-#  define KEY_RIGHT	65363
-#  define KEY_ESC	65307
-# endif
+*/
+enum
+{
+	ONE = 18,
+	TWO = 19,
+	THREE = 20,
+	FOUR = 21,
+	FIVE = 23,
+	SIX = 22,
+	UP = 65362,
+	DOWN = 65364,
+	LEFT = 65361,
+	RIGHT = 65363,
+	A = 97,
+	D = 100,
+	W = 119,
+	S = 115,
+	ESC = 65307,
+	N = 110,
+	M = 109,
+	PLUS = 61,
+	MINUS = 45
+};
 
 void	kh_turn_view(int keycode, t_fdf_info *p)
 {
-	int	prev_h;
-	int	prev_v;
-
-	prev_h = p->h_angle;
-	prev_v = p->v_angle;
 	free_tri_arr(p);
 	if (keycode == ONE)
 		proj(p, 55, -45);
@@ -136,6 +134,7 @@ void	kh_rot_view(int keycode, t_fdf_info *p)
 
 int	key_hook(int keycode, t_fdf_info *p)
 {
+	printf("%i is keycode.\n", keycode);
 	if (keycode == ESC)
 		terminate(p);
 	else if (keycode >= ONE && keycode <= FIVE)

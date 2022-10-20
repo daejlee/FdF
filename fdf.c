@@ -77,8 +77,9 @@ int	main(int argc, char **argv)
 	if (!prep_mlx(&p))
 		return (err());
 	proj(&p, 55, -45);
-	mlx_hook(p.wp, ON_DESTROY, 0, terminate, &p);
-	mlx_hook(p.wp, ON_KEYDOWN, 0, key_hook, &p);
+	//mlx_hook(p.wp, ON_DESTROY, 0, terminate, &p);
+	//mlx_hook(p.wp, ON_KEYDOWN, 0, key_hook, &p);
+	mlx_key_hook(p.wp, key_hook, &p);
 	mlx_loop(p.mp);
 	return (0);
 }

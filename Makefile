@@ -32,7 +32,8 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -lft -L$(LIBFT_DIR) $(MLX_FLAGS)
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRC) $(LIBFT_DIR)/libft/*.c $(LIBFT_DIR)/ft_printf/*.c $(LIBFT_DIR)/gnl/*.c -lmlx_Linux -lX11 -lXext -L./minilibx-linux -lm
+#	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES) -lft -L$(LIBFT_DIR) $(MLX_FLAGS)
 
 $(OBJ_FILES) : $(SRC_FILES)
 	$(CC) $(CFLAGS) -c $(SRC_FILES)
